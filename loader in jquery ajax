@@ -1,0 +1,30 @@
+<script src="https://cdn.jsdelivr.net/npm/gasparesganga-jquery-loading-overlay@2.1.7/dist/loadingoverlay.min.js"></script>
+$(document).on('click','#btn-add',function(e) {
+			var data = $('#price_rules').serialize();
+			$("#price_rules").LoadingOverlay("show", {
+              	background  : "rgba(165, 190, 100, 0.5)"
+              	});
+			$.ajax({
+              data: data,
+              type: "post",
+              url: "{{route('add_discount')}}",
+              success: function(response)
+              {
+              	var result = JSON.parse(response);
+              	if(result.status==200)
+              	{
+              		$('#addDiscountModal').modal('hide');
+              		// $("#success").show();
+					// $('#success').html('Discount Added Successfully!');
+					location.reload();
+					showNotify(result.message,"success");
+              	}
+              	else
+              	{
+              		$('#addDiscountModal').modal('hide');
+                    location.reload();
+                    showNotify(result.message,"danger");
+              	}
+              }
+			});
+		});
