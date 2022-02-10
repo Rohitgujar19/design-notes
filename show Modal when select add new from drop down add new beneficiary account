@@ -1,0 +1,64 @@
+<select class="form-control select2"id="beneficiary_acc_number"name="beneficiary_acc_number">
+								<option value=""selected="true" disabled="disabled">Select Beneficiary</option>
+								<option value="addNewModal">Add New Beneficiary</option>
+								<?php
+								 	while($result = $getBenificiary->fetch_array())
+									{
+										?>
+										<option value="<?=$result['id']?>"><?=$result['beneficiary_name']?></option>
+										<?php
+									}
+								?>								
+							</select>
+              
+              
+              
+              //mdoal
+              <!-- Add  Beneficiary Modal -->
+	<div id="addNewModal" class="modal fade">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<form id="add_new_beneficiary_form">
+					<div class="modal-header">
+						<h4 class="modal-title">Add New Beneficiary</h4>
+						<button type="button"class="close" data-dismiss="modal"aria-hidden="true">x</button>
+					</div>
+					<div class="modal-body">
+						<div class="form-group">
+							<label>Beneficiary Name</label><span id="beneficiary_name_error"></span>
+							<input type="text"id="beneficiary_name"name="beneficiary_name"class="form-control"required>
+						</div>
+						<div class="form-group">
+							<label>Beneficiary Email</label><span id="beneficiary_email_error"></span>
+							<input type="text"id="beneficiary_email"name="beneficiary_email"class="form-control">
+						</div>
+						<div class="form-group">
+							<label>Beneficiary Account Number</label><span id="beneficiary_ac_number_error"></span>
+							<input type="text"id="beneficiary_ac_number"name="beneficiary_ac_number"class="form-control">
+						</div>
+						<div class="form-group">
+							<label>IFSC</label><span id="ifsc_code_error"></span>
+							<input type="text"id="ifsc_code"name="ifsc_code"class="form-control">
+						</div>
+					</div>
+					<div class="modal-footer">
+						<input type="button"class="btn btn-default"data-dismiss="modal"value="Cancel">
+						<button type="button"class="btn btn-success"id="btn-add">Add</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- End Beneficiary Modal -->
+  
+  // jQUERy
+  
+  
+  $(document).on('change','#beneficiary_acc_number',function()
+    {
+    	var beneficiary_acc_number = $('#beneficiary_acc_number').val();
+    	if(beneficiary_acc_number=="addNewModal")
+    	{
+    		$('#addNewModal').modal();
+    	}
+    });
+              
